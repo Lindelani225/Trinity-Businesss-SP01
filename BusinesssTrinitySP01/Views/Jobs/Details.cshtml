@@ -1,0 +1,84 @@
+﻿@model BusinesssTrinitySP01.Models.Job
+
+@{
+    ViewBag.Title = "Job Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Job Details</b></h3>
+        <br />
+
+
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobDescription)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobRequirments)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobRequirments)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClosingDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClosingDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+
+            </dl>
+        </div>
+
+        @if (User.IsInRole("Super Admin"))
+        {
+            <p>
+                @Html.ActionLink("Update", "Edit", new { id = Model.JobID }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        }
+
+
+
+    </div>
+</div>
+
+
+

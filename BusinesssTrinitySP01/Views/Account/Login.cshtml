@@ -1,0 +1,78 @@
+﻿@using BusinesssTrinitySP01.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login Now!";
+}
+
+<div class="container" style="margin-top:5vh;">
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4 style="margin-bottom:5vh;">Already A Customer?</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <i class="fa fa-envelope col-md-5 control-label">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        </i>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-lock form-group col-md-5 control-label">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        </i>
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                <i>
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <i>
+                                <input type="submit" value="Login" class="btn btn-primary" />
+                            </i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-10 col-md-10">
+                            <p>
+                                <i>
+                                    @Html.ActionLink("Not a customer? Register Now!", "Register")
+                                </i>
+                            </p>
+                        </div>
+                    </div>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                }
+            </section>
+        </div>
+        <div class="col-md-4" style="margin-left:-8vw;">
+            <section id="socialLoginForm">
+                @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+                <img src="~/Content/TrinityImages/LoginIcon.jpg" width="400" height="300" />
+            </section>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

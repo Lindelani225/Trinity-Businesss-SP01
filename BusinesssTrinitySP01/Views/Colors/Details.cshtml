@@ -1,0 +1,38 @@
+﻿@model BusinesssTrinitySP01.Models.Color
+
+@{
+    ViewBag.Title = "Color Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Color</b></h3>
+        <br />
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+
+                <dd>
+                    <img src="/Colors/RetrieveImage/@Model.BoxId" alt="" height=80 width=80 />
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.BoxId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

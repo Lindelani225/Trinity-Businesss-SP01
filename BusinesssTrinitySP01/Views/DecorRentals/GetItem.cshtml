@@ -1,0 +1,107 @@
+﻿@model BusinesssTrinitySP01.Models.PackageItem
+
+<div class="modal-header">
+    <h4 class="modal-title fa fa-edit">Item Details</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+</div>
+@using (Html.BeginForm("GetItem", "DecorRentals", new { comp = Model.CompId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="modal-body">
+            @Html.Action("ComponentDetails", "DesignComps", new { Id = Model.CompId })
+            <div class="form-horizontal">
+
+                <div class="form-group" hidden>
+                    @Html.LabelFor(model => model.PckId, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PckId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PckId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" hidden>
+                    @Html.LabelFor(model => model.CompId, "Component ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CompId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Color</th>
+                        @foreach (var Item in Model.compColors)
+                        {
+                            <td>
+                                <img src="/Colors/RetrieveImage/@Item.BoxId" alt="" height=40 width=40 />
+                                <input type="radio" name="BoxId" value="@Item.BoxId" required />
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        @*<td colspan="5">
+                            @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
+                    <td colspan="5">
+                        <div class="text-center form-control">
+                            <input class="btn btn-secondary" style="min-width: 3vw; height: 5vh;" type="button" onclick="decrementValue()" value="-" />
+                            <input style="min-inline-size:3vw; height:4.8vh;" class="text-center" type="text" name="Qty" value="@Model.Qty" maxlength="3" size="1" id="quantity" />
+                            <input class="btn btn-secondary" style="min-width:3vw; height:5vh;" type="button" onclick="incrementValue()" value="+" />
+                        </div>
+                    </td>
+                    </tr>
+                </table>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.BoxId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" hidden>
+                    <label class="control-label col-md-2">Price&nbsp;(<b>R</b>)</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Adding...
+                </span>
+                <input type="submit" value="Add To Package" class="button btn" style="width:50%;" />
+                <button class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function incrementValue() {
+        var value = parseInt(document.getElementById('quantity').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if (value < 500) {
+            value++;
+            document.getElementById('quantity').value = value;
+        }
+    }
+    function decrementValue() {
+        var value = parseInt(document.getElementById('quantity').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if (value > 1) {
+            value--;
+            document.getElementById('quantity').value = value;
+        }
+
+    }
+</script>
+
+@Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval", "~/Scripts/js/bootstrap.js")

@@ -1,0 +1,67 @@
+﻿@model BusinesssTrinitySP01.Models.Rate
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order.PaymentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order.PaymentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stars)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stars)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.service)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.service)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

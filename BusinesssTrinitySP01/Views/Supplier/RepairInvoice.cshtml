@@ -1,0 +1,141 @@
+﻿@using BusinesssTrinitySP01.Models;
+@model QuoteReport
+@{
+    ViewBag.Title = "RepairInvoice";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quote Report</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center lh-1 mb-2">
+                    <h6 class="fw-bold">Repair Invoice</h6> <span class="fw-normal">Report for the month of @ViewBag.QuoteMnth @Html.DisplayFor(x => x.Quote.DateCreated.Year)</span>
+                </div>
+                <div class="d-flex justify-content-end"> <span>@Html.DisplayFor(x => x.Supplier.SuppName) </span> </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div> <span class="fw-bolder">Repair Code:</span> <small class="ms-3">@Html.DisplayFor(x => x.QuoteID)</small> </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div> <span class="fw-bolder">Date:</span> <small class="ms-3">@Html.DisplayFor(x => x.Quote.DateCreated)</small> </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div> <span class="fw-bolder">Repair Type:</span> <small class="ms-3">@ViewBag.QuoteType</small> </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div> <span class="fw-bolder">Duration:</span> <small class="ms-3">@Html.DisplayFor(x => x.Quote.Duration) </small> </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div> <span class="fw-bolder">Payment Method:</span> <small class="ms-3">@Html.DisplayFor(x => x.Supplier.SuppPaymentMethod)</small> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>@ViewBag.NotFound</p>
+                    @if (Model.quoteItems != null)
+                    {
+                        <table class="mt-4 table table-bordered">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Repairability</th>
+                                    <th scope="col">Actual Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (QuoteItem item in Model.quoteItems)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.ItemCode</th>
+                                        <td>@item.Repairability</td>
+                                        <td>@item.ACost.ToString("C")</td>
+
+                                    </tr>
+
+                                }
+                                <tr class="border-top table-active">
+                                    <td></td>
+                                    <th scope="row">Total Costs:</th>
+                                    <td>@ViewBag.TotalCost</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    }
+                </div>
+                @if (User.IsInRole("Super Admin"))
+                {
+                    if (Model.Quote.Acceptance != "Accepted")
+                    {
+                        <a class="btn btn-primary text-center" data-modal="" href="@Url.Action("Accept", "Admin", new { id = Model.QuoteID })" id="btnCreate"> Accept</a>
+                    }
+
+                    if (Model.Quote.QRCode != null)
+                    {
+                        <p style="text-align:right"><i>For the supplier to scan during Item collection</i></p>
+                        <div>
+                            <img style="float:right;" src="@Url.Content(Model.Quote.QRCode)" alt="Image" width="200" height="200" />
+                        </div>
+                        <a class="btn btn-primary text-center" href="@Url.Action("PrintPartialViewToPdf", "Home", new { id = Model.QuoteID })" id="btnCreate" target="_blank">Print PDF</a>
+                    }
+
+                }
+
+                @if (User.IsInRole("Supplier"))
+                {
+                    if (Model.Quote.Acceptance == "Accepted" && Model.Quote.Status != "Collected")
+                    {
+                        <a class="btn btn-primary text-center" href="@Url.Action("QRScanner", "Supplier", new { id = Model.QuoteID })" id="btnCreate" target="_blank">Confirm Item Collection</a>
+
+                    }
+
+                    else if (Model.Quote.Acceptance == "Accepted" && Model.Quote.Status == "Collected" && Model.Request.Status != "Items Repaired")
+                    {
+                        <a class="btn btn-primary text-center" data-modal="" href="@Url.Action("ConfirmInvoice", "Supplier", new { id = Model.Quote.RequestID })" id="btnCreate">Confirm Repair Invoice</a>
+                    }
+
+                    
+                }
+            </div>
+        </div>
+    </div>
+    <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/Scripts/appjs/phones.js")
+    }
+
+</body>
+
+</html>
+
+
+
+

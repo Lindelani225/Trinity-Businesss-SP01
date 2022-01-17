@@ -1,0 +1,43 @@
+﻿@model BusinesssTrinitySP01.Models.CompColor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CompColor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DesignComp.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesignComp.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qty)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ColorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

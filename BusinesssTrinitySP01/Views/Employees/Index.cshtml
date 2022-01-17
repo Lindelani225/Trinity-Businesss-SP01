@@ -1,0 +1,126 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.Employee>
+
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Employees</b></h3>
+        <br CreateRol
+        <p>
+            @Html.ActionLink("New Employee", "Create", "Employees")
+        </p>
+        <p>
+            @Html.ActionLink("Add User", "CreateUserAndAssignRole", "Admin")
+        </p>
+        <p>
+            @Html.ActionLink("Add Role", "CreateRole", "Admin")
+        </p>
+
+        <table class="table table-hover table-bordered">
+            @*<tr class="table-active table-bordered">
+                <th colspan="4" class="text-center"><h5><b style="font-size:18px;">Requests for quotation</b></h5></th>
+            </tr>*@
+            <tr class="table">
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpRSAID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpLName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpPosition)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpDuty)
+                </th>
+                <th class="text-center">Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.EmpCode)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.EmpRSAID)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.EmpName)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.EmpLName)
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.EmpPhone)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.EmpEmail)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.EmpPosition)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.EmpDuty)
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        @Html.ActionLink("Update", "Edit", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("View", "Details", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Remove", "Delete", new { id = item.EmployeeID })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+  

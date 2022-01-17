@@ -1,0 +1,321 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.OrderAssignment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/DriverLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/Content/Admin/style.css">
+    <style>
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px
+        }
+
+            .pagination > li {
+                display: inline
+            }
+
+                .pagination > li > a, .pagination > li > span {
+                    position: relative;
+                    float: left;
+                    padding: 6px 12px;
+                    margin-left: -1px;
+                    line-height: 1.42857143;
+                    color: #337ab7;
+                    text-decoration: none;
+                    background-color: #fff;
+                    border: 1px solid #ddd
+                }
+
+                    .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+                        z-index: 2;
+                        color: #23527c;
+                        background-color: #eee;
+                        border-color: #ddd
+                    }
+
+                .pagination > li:first-child > a, .pagination > li:first-child > span {
+                    margin-left: 0;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px
+                }
+
+                .pagination > li:last-child > a, .pagination > li:last-child > span {
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px
+                }
+
+            .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+                z-index: 3;
+                color: #fff;
+                cursor: default;
+                background-color: #337ab7;
+                border-color: #337ab7
+            }
+
+            .pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd
+            }
+
+        .pagination-lg > li > a, .pagination-lg > li > span {
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.3333333
+        }
+
+        .pagination-lg > li:first-child > a, .pagination-lg > li:first-child > span {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px
+        }
+
+        .pagination-lg > li:last-child > a, .pagination-lg > li:last-child > span {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px
+        }
+
+        .pagination-sm > li > a, .pagination-sm > li > span {
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5
+        }
+
+        .pagination-sm > li:first-child > a, .pagination-sm > li:first-child > span {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px
+        }
+
+        .pagination-sm > li:last-child > a, .pagination-sm > li:last-child > span {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px
+        }
+    </style>
+    <!-- Boxicons CDN Link -->
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i><box-icon type='solid' color="white" name='user'></box-icon></i>
+            <span class="logo_name">Driver</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="@Url.Action("Index","Drivers")" class="active">
+                    <i><box-icon type='solid' name="dashboard" color="white"></box-icon></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("DeliveryDetails","Drivers")">
+                    <i><box-icon type='solid' name="user-detail" color="white"></box-icon></i>
+                    <span class="links_name">Delivery Details</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon type='solid' name="box" color="white"></box-icon></i>
+                    <span class="links_name">Service Return</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("ReturnDetails","Drivers")">
+                    <i><box-icon type='solid' name="coin-stack" color="white"></box-icon></i>
+                    <span class="links_name">Equipment Return</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon name="pie-chart-alt-2" color="white"></box-icon></i>
+                    <span class="links_name">Driver Statistics</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon type='solid' color="white" name='map'></box-icon></i>
+                    <span class="links_name">Maps</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon type='solid' color="white" name="message-dots"></box-icon></i>
+                    <span class="links_name">Notifications</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon type='solid' color="white" name='pin'></box-icon></i>
+                    <span class="links_name">Vaccancies</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("","")">
+                    <i><box-icon type='solid' color="white" name='log-out'></box-icon></i>
+                    <span class="links_name">LogOut</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+            @using (Html.BeginForm("Index", "Driver", FormMethod.Get))
+            {
+                <div class="sorting">
+                    <div class="search-box">
+                        @Html.Editor("searchDate", new { htmlAttributes = new { @class = "search", @Type = "Date" } })
+                        <input class="bx bx-search" type="submit" value="Sort By" />
+                    </div>
+                    <div class="radio-btn">
+                        <label>Date:</label> &nbsp;&nbsp;&nbsp;&nbsp;@Html.RadioButton("searchBy", "Date", true)
+                        <label>Status:</label>&nbsp;&nbsp;@Html.RadioButton("searchBy", "Status")
+                    </div>
+                    <div class="profile-details">
+                        <select id="searchDrop" name="searchDrop" class="DropStatus">
+                            <option>Select Status</option>
+                            <option>All Records</option>
+                            <option>Awaiting</option>
+                            <option>Delivered</option>
+                            <option>Complete</option>
+                        </select>
+                    </div>
+                </div>
+            }
+        </nav>
+
+        <div class="home-content">
+            <div class="overview-boxes">
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Total Deliveries</div>
+                        <div class="number">@ViewBag.Deliveries</div>
+                        <div class="indicator">
+                            <i class='bx bx-coin-stack'></i>
+                            <span class="text">@ViewBag.MyDeliveries Delivered By Me</span>
+                        </div>
+                    </div>
+                    <i class='bx bx-coin-stack cart'></i>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">On Delivery</div>
+                        <div class="number">@ViewBag.OnDelivery</div>
+                        <div class="indicator">
+                            <i class='bx bx-up-arrow-alt'></i>
+                            <span class="text">@ViewBag.Awaiting Awaiting Delivery</span>
+                        </div>
+                    </div>
+                    <i class='fa fa-truck cart three'></i>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Delivered</div>
+                        <div class="number">@ViewBag.Delivered</div>
+                        <div class="indicator">
+                            <i class='bx bx-down-arrow-alt down'></i>
+                            <span class="text">@ViewBag.Unconfirmed Not Confirmed</span>
+                        </div>
+                    </div>
+                    <i class='fa fa-box cart four'></i>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Complete</div>
+                        <div class="number">@ViewBag.Complete</div>
+                        <div class="indicator">
+                            <i class='bx bx-up-arrow-alt'></i>
+                            <span class="text">@ViewBag.Delivered Completed By Me</span>
+                        </div>
+                    </div>
+                    <i class='fa fa-check cart two'></i>
+                </div>
+            </div>
+
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                    <div class="title"><b>GPS Navigator</b></div>
+                    <!--Order Information-->
+                    <style>
+                        #map {
+                            height: 90%;
+                        }
+                    </style>
+                    <script src="~/Scripts/Location.js"></script>
+                    <div id="map"></div>
+                    <!--//Order Information-->
+                </div> 
+                <div class="top-sales box">
+                    <div class="title text-center"><b>Assigned Orders</b></div>
+                    <ul class="top-sales-details">
+                        <li>
+                            <style>
+                                .Orders td {
+                                    padding-bottom: 2vh;
+                                }
+                            </style>
+                            <table style="margin-top:2vh;">
+                                <tr>
+                                    <td><b></b></td>
+                                    <td><b>Name</b></td>
+                                    <td style="padding-left:15px;"><b>Deliver On</b></td>
+                                    <td style="padding-left:25px;"><b>Action</b></td>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="Orders">
+                                        <td>
+                                            <img src="~/Content/Admin/images/shirt.jpg" alt="" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Order.ClientProfile.FirstName)
+                                        </td>
+                                        <td style="padding-left:15px;">
+                                            @Html.DisplayFor(modelItem => item.Order.ShippimgDetails.DeliveryDate)
+                                        </td>
+                                        <td style="padding-left:25px;">
+                                            @Html.ActionLink("View", "Details", "Orders", new { id = item.OrderID }, new { @class = "View" })
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACS-j-roFjqk4-TGcCZZsppjREQ0U1gV0&callback=initMap&v=weekly"></script>
+</body>
+</html>
+
+
+
+
+
+
+

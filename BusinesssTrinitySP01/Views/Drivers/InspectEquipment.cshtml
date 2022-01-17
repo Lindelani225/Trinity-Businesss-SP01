@@ -1,0 +1,87 @@
+﻿@model List<BusinesssTrinitySP01.Models.OrderItem>
+
+@{
+    ViewBag.Title = "Inspect Equipment";
+    Layout = "~/Views/Shared/DriverLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:5vh;">
+        <h2 class="text-center">Equipment Inspection</h2>
+        <br />
+        <div class="text-center text-danger">
+            @ViewBag.SumError
+        </div>
+        <br />
+        @using (Html.BeginForm("InspectEquipment", "Drivers", FormMethod.Post))
+        {
+            <table class="table table-hover">
+                <tr class="table-active">
+                    <th hidden="hidden">
+                        <label><b>Equipment ID</b></label>
+                    </th>
+                    <th hidden="hidden">
+                        <label><b>Order ID</b></label>
+                    </th>
+
+                    <th hidden="hidden">
+                        <label><b>Order Item ID</b></label>
+                    </th>
+
+                    <th>
+                        <label><b>Equipment Name</b></label>
+                    </th>
+                    <th>
+                        <label><b>Quantity</b></label>
+                    </th>
+
+                    <th>
+                        <label><b>No. Missing</b></label>
+                    </th>
+
+                    <th>
+                        <label><b>No. Damaged</b></label>
+                    </th>
+                </tr>
+
+                @for (int i = 0; i < ViewBag.Count; i++)
+                {
+                    <tr>
+
+                        <td hidden="hidden">
+                            @Html.HiddenFor(x => Model[i].OrderID)
+                        </td>
+                        <td hidden="hidden">
+                            @Html.HiddenFor(m => Model[i].EquipmentID)
+                        </td>
+
+                         <td hidden="hidden">
+                            @Html.HiddenFor(m => Model[i].OrderItemid)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].Equipment.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].quantity)
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(x => Model[i].MissingItems)
+                        </td>
+                        <td>
+                            @Html.EditorFor(x => Model[i].DamagedItems)
+                        </td>
+
+                    </tr>
+                }
+
+
+            </table>
+            <div class="text-center" style="margin-top:4vh;">
+                <input type="submit" value="Generate Report" class="btn btn-success" />
+            </div>
+
+        }
+    </div>
+    </div>

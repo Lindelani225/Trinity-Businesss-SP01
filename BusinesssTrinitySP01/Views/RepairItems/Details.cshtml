@@ -1,0 +1,74 @@
+﻿@model BusinesssTrinitySP01.Models.RepairItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="jumbotron">
+    <div class="container">
+        <style>
+            table {
+                width: 100%;
+            }
+
+            table, th, td {
+                border: 1px solid grey;
+                border-collapse: collapse;
+                padding: 7px;
+            }
+
+                table tr:nth-child(odd) {
+                    background-color: #f1f1f1;
+                }
+
+                table tr:nth-child(even) {
+                    background-color: #ffffff;
+                }
+        </style>
+        <table>
+            <tr><td colspan="2" style="width:100%;height:50px; text-align:center;"><b>Items To Repair</b></td></tr>
+            <tr>
+                <td>
+                    <label><b>Item Name:</b>&nbsp;</label>
+                    @ViewBag.EName
+                </td>
+                <td>
+                    <label><b>Item Picture:</b>&nbsp;</label>
+                    @if (Model.img != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.img);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src='@imgsrc' style="max-width:170px;max-height:200px" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><b>Repair ID:</b>&nbsp;</label>@Model.RequestID
+                </td>
+                <td>
+                    <label><b>Item Picture:</b>&nbsp;</label>
+                    @if (Model.img2 != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.img2);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src='@imgsrc' style="max-width:170px;max-height:200px" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><b>Equipment ID:</b>&nbsp;</label>@Model.EquipmentID
+                </td>
+                <td style="width:10px;height:10px">
+                    <label><b>Damage Description:</b>&nbsp;</label> @Model.Description
+                </td>
+            </tr>
+        </table>
+        <p class="text-center" style="margin-top:5vh;">
+            @Html.ActionLink("Back", "Edit","RepairItems", new { id = Model.ItemID }, new {@class="btn btn-success" }) 
+        </p>
+    </div>
+</div>

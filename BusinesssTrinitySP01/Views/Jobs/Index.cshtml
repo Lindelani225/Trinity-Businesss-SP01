@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.Job>
+
+@{
+    ViewBag.Title = "Vacancies";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Jobs</b></h3>
+        <br />
+        <p>
+            @Html.ActionLink("New Job", "Create")
+        </p>
+        <table class="table table-hover table-bordered">
+            @*<tr class="table-active table-bordered">
+                <th colspan="4" class="text-center"><h5><b style="font-size:18px;">Requests for quotation</b></h5></th>
+            </tr>*@
+            <tr class="table">
+                <th>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClosingDate)
+                </th>
+
+                <th class="text-center">Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.JobType)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayNameFor(model => model.JobCode)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.ClosingDate)
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" href="@Url.Action("Details", "Jobs", new { id = item.JobID })">View Job</a>
+                        <a class="btn btn-primary" data-modal="" href="@Url.Action("Edit", "Jobs", new { id = item.JobID })" id="btnCreate">@*<i class="fa fa-eye"></i>*@ Update</a>
+                        <a class="btn btn-primary" data-modal="" href="@Url.Action("Delete", "Jobs", new { id = item.JobID })" id="btnCreate">@*<i class="fa fa-eye"></i>*@ Remove</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@*<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/appjs/phones.js")
+}*@
+
+
+
+

@@ -1,0 +1,180 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.DesignComp>
+
+@{
+    ViewBag.Title = "Decor Components";
+    //Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/Content/Admin/GetComps.css" type="text/css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <!-- Boxicons CDN Link -->
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i><box-icon type='solid' name="dashboard" color="white"></box-icon></i>
+            <span class="logo_name">Category</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="active">
+                    <i><box-icon name="abacus" color="white"></box-icon></i>
+                    <span class="links_name">All Mixed</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon type='solid' name="inbox" color="white"></box-icon></i>
+                    <span class="links_name">Ceiling</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon type='solid' name="wallet" color="white"></box-icon></i>
+                    <span class="links_name">Wall</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon name="grid" color="white"></box-icon></i>
+                    <span class="links_name">Floor</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon type='solid' name="pie-chart-alt-2" color="white"></box-icon></i>
+                    <span class="links_name">Tables</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon color="white" name='chair'></box-icon></i>
+                    <span class="links_name">Chairs</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i><box-icon type='solid' color="white" name='star'></box-icon></i>
+                    <span class="links_name">Extras</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Design</span>
+            </div>
+            @using (Html.BeginForm("", "", FormMethod.Get))
+            {
+                <div class="sorting">
+                    <div class="search-box">
+                        <input class="bx bx-search" type="submit" value="Change" />
+                        <div class="profile-details">
+                            <select id="searchDrop" name="searchDrop" class="DropStatus">
+                                <option>Change Theme</option>
+                                <option>Wedding</option>
+                                <option>Party</option>
+                                <option>Tradition</option>
+                                <option>Funeral</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            }
+        </nav>
+        <div class="home-content">
+            <div class="overview-boxes">
+                @foreach (var item in Model)
+                {
+                    <div style="margin-bottom:3vh;" class="box" id="design">
+                        <div class="men-thumb-item text-center">
+                            @if (item.Image != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                <img src="@imgsrc" alt="" height=180 width=220 />
+                            }
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        @*<span class="link-product-add-cart btnEdit" id="edit_@item.CompId" onclick="createModal('@Url.Action("GetItems", "DesignComps" , new {Id=item.CompId })')"><i class="fa fa-shopping-cart"></i> Select</span>*@
+                                        <a class="link-product-add-cart btnEdit" data-modal="" href="@Url.Action("GetItem", "DecorRentals", new { CompID = item.CompId })" id="btnCreate"><i class="fa fa-shopping-cart"></i> Select</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+            <a class="button btn" href="@Url.Action("PackageReview","DecorRentals", new {PckID = ViewBag.PckID })"><i class="fa fa-box"></i> Finalize Package</a>
+        </div>
+    </section>
+
+    <!-- Package Item Details - Modal -->
+    @*<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content" id="modelContent">
+                </div>
+            </div>
+        </div>
+        <script>
+            function createModal(url) {
+                $('#modelContent').load(url);
+                $('#myModal').modal('show');
+            }
+        </script>*@
+
+    <!-- modal placeholder-->
+    <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/Scripts/appjs/phones.js")
+    }
+
+    <!-- //Package Item Details - Modal -->
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+    <script type="text/javascript">
+        document.getElementById("circle").onclick = function () {
+
+            document.getElementById("rounded").style.display = "none";
+        }
+
+        document.getElementById("rounded").onclick = function () {
+
+            document.getElementById("rounded").style.display = "none";
+
+        }
+
+        document.getElementById("square").onclick = function () {
+
+            document.getElementById("square").style.display = "none";
+        }
+    </script>
+
+</body>
+

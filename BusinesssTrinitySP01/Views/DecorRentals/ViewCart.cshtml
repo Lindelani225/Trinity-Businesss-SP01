@@ -1,0 +1,35 @@
+﻿@model BusinesssTrinitySP01.Models.Package
+
+
+<div tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title text-center fa fa-box"> Custom Decoration Package</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-form-label">Package&nbsp;Name</label>
+                    <input type="text" class="form-control" value="@Model.Name" readonly="readonly" />
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Decoration&nbsp;Theme</label>
+                    <input type="text" class="form-control" value="@ViewBag.Theme" readonly="readonly" />
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Date&nbsp;Created</label>
+                    <input type="text" class="form-control" value="@Model.DateCreated.ToShortDateString()" readonly="readonly">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Total&nbsp;Cost</label>
+                    <input type="text" class="form-control" value="@ViewBag.TotalCost" readonly="readonly">
+                </div>
+
+                <div class="form-group">
+                    <label><b>Total Number of Items in Package:</b>&nbsp;@ViewBag.NumItems</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model BusinesssTrinitySP01.Models.OrderAssignment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderAssignment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PaymentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.PaymentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedDriver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedDriver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedGen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedGen)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderAssID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

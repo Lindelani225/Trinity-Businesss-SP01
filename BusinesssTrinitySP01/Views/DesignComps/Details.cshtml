@@ -1,0 +1,86 @@
+﻿@model BusinesssTrinitySP01.Models.DesignComp
+
+@{
+    ViewBag.Title = "Design Component";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Design Component</b></h3>
+        <br />
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Theme.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Theme.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+
+                <dd>
+                    @if (Model.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Image);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src='@imgsrc' style="max-width:80px;max-height:80px" />
+                    }
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Qty)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Qty)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UnitPrice)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RentPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RentPrice)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Update Component", "Edit", new { id = Model.CompId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+
+
+    </div>
+</div>
+
+    

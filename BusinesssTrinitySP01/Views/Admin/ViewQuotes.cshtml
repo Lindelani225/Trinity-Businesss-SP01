@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.Quote>
+    @{ 
+        ViewBag.Title = "Quotes";
+        Layout = "~/Views/Shared/AdminLayout.cshtml";
+    }
+
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Quotes</b></h3>
+        <br />
+
+        <table class="table table-hover table-bordered">
+         
+            <tr class="table">
+                <th hidden="hidden">Quote ID</th>
+                <th hidden="hidden">Request ID</th>
+                <th>Date</th>
+                <th>Supplier</th>
+                <th>Duration</th>
+                <th>Shipment Type</th>
+                <th class="text-center">Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td hidden="hidden">
+                        @Html.HiddenFor(x => item.QuoteID)
+                        @Html.HiddenFor(x => item.RequestID)
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => item.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(m => item.Supplier.SuppName)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(x => item.Duration)
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(x => item.ShipmentType)
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" href="@Url.Action("Report", "Supplier", new { id = item.QuoteID })">View Report</a>
+
+                        @if (item.Acceptance == "Accepted" && item.ShipmentType == "Trinity Delivery")
+                        {
+                            <a class="btn btn-secondary" href="@Url.Action("ScheduleDriver", "Admin", new { id = item.RequestID })">Shchedule Driver</a>
+                        }
+
+                        @if (item.Acceptance == "Accepted" && item.Request.Status == "Items Repaired")
+                        {
+                            <a class="btn btn-secondary" href="@Url.Action("ViewInvoice", "Admin", new { id = item.QuoteID})">Repair Invoice</a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/appjs/phones.js")
+}

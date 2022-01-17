@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.PackageItem>
+@{
+    ViewBag.Title = "Package Review";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Package Review</b></h3>
+        <br />
+        <table class="table table-hover table-bordered">
+            <tr class="table-active table-bordered">
+                <th colspan="5"><h5><b style="font-size:18px;">Package Name:</b><label style="font-size:18px;">&nbsp;@ViewBag.Package</label></h5></th>
+                <th>
+                    <div class="text-center">
+                        <a class="btn btn-primary" href="@Url.Action("GetComponents","DecorRentals", new { thmId = ViewBag.thmID  })">
+                            <span class="fa fa-plus"></span>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            <tr class="table">
+                <th>Selected Color</th>
+                <th>Name of Component</th>
+                <th>Picture</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Color.Image != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.Color.Image);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" alt="" height=80 width=80 />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DesignComp.Name)
+                    </td>
+                    <td>
+                        @if (item.DesignComp.Image != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.DesignComp.Image);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" alt="" height=80 width=80 />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @item.Price.ToString("C")
+                    </td>
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" data-modal="" href="@Url.Action("EditItems","DecorRentals",new { itmID = item.ItemId })" id="btnCreate"><i class="fa fa-edit"></i> Update</a>
+                        <a class="btn btn-secondary" data-modal="" href="@Url.Action("RemoveItem","DecorRentals", new { itmID = item.ItemId })" id="btnCreate"><i class="fa fa-recycle"></i> Remove</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+            <tr class="table-active">
+                <td colspan="4"><label><b>Total Cost:</b></label></td>
+                <td colspan="2"><b>@ViewBag.TotalCost</b></td>
+            </tr>
+        </table>
+        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+            @*<a class="button btn" href="@Url.Action("AddToCart","DecorRentals", new {PckID = ViewBag.PckID })"><i class="fa fa-shopping-cart"></i> Add To Cart</a>*@
+            <a href="@Url.Action(actionName: "AddToCart", controllerName: "DecorRentals", routeValues: new {PckID = ViewBag.PckID })" class="button btn"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+        </div>
+    </div>
+</div>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/appjs/phones.js")
+}
+
+<!-- //Package Item Details - Modal -->

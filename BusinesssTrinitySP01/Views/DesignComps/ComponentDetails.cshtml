@@ -1,0 +1,45 @@
+﻿@model BusinesssTrinitySP01.Models.DesignComp
+
+@*<div class="modal-header">
+    <h4 class="modal-title">Item Details</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+</div>
+<div class="modal-body">*@
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>
+                @*@Html.DisplayNameFor(model => model.RentPrice)*@
+                <label>Price&nbsp;(<b>R</b>)</label>
+            </td>
+            <td>@Html.DisplayFor(model => model.RentPrice)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Image)</td>
+            <td>
+                @if (Model.Image != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' style="width:80px;height:80px" />
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+    @*</div>
+</div>
+<div class="modal-footer">
+    <a style="padding: 0 20px 0;" href="@Url.Action(actionName: "AddToCart", controllerName: "Home", routeValues: new { id = Model.CompId })" data-toggle="modal" , data-target="#exampleModal" class="link-product-add-cart"><i class="fa fa-shopping-cart"></i> Add To Package</a>
+    <button type="button" class="btn btn-default"
+            data-dismiss="modal">
+        Close
+    </button>
+</div>*@
+

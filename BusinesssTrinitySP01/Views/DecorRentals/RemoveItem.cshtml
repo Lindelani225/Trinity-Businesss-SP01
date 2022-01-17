@@ -1,0 +1,70 @@
+﻿@model BusinesssTrinitySP01.Models.PackageItem
+
+<div class="modal-header">
+    <h4 class="modal-title fa fa-recycle"> Remove Item</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+            
+            <div class="form-group">
+                <label class="control-label col-sm-3">Selected&nbsp;Color</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Color.Name, new { @class = "form-control required", @disabled = "disabled" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">Component&nbsp;Name</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.DesignComp.Name, new { @class = "form-control required", @disabled = "disabled" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">Package&nbsp;Name</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Package.Name, new { @class = "form-control required", @disabled = "disabled" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => Model.Qty, new { @class = "control-label col-sm-3" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Qty, new { @class = "form-control required", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.Price, new { @class = "control-label col-sm-3" })
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="Price" value="@Model.Price.ToString("C")" readonly="readonly" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <h3>
+                        <span style="font-size:20px;" class="label text-danger">
+                            Are you sure to remove this Item?
+                        </span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Removing...
+        </span>
+        <input type="submit" value=" Remove" class="btn btn-danger" />
+        <button class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+    </div>
+
+}

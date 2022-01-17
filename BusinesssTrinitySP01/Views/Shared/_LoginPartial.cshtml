@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <style>
+            .border-left {
+                padding-left: 1vw;
+            }
+        </style>
+        <li style="margin-left: 38vw; display:flex;" class="text-center text-white">
+            <div style="margin-top:-3.2vh; display:flex;">
+                <i class="fas fa-user mr-2"></i>
+                @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "text-white " })
+                <a style="display:flex; padding-left: 2vw;" href="javascript:document.getElementById('logoutForm').submit()" class="text-white">
+                    <i class="fas fa-sign-out-alt mr-2 border-left"></i>SignOut
+                </a>
+            </div>
+        </li>
+    }
+}
+else
+{
+    <li class="text-center border-right text-white">
+        <a href="#" class="text-white">
+            <i class="fas fa-sign-out-alt "></i>
+            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "text-white" })
+        </a>
+    </li>
+    <li class="text-center text-white">
+        <a href="#" class="text-white">
+            <i class="fas fa-sign-in-alt mr-2"></i>
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "text-white" })
+        </a>
+    </li>
+
+}

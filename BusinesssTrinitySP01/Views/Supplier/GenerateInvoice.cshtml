@@ -1,0 +1,85 @@
+﻿@model List<BusinesssTrinitySP01.Models.QuoteItem>
+@{
+    ViewBag.Title = "Generate Invoice";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="jumbotron">
+        <div class="container" style="margin-top:4vh;">
+            <h3 class="text-center"><b>Damaged Items For Repair</b></h3>
+            <br />
+            <table class="table table-hover table-bordered">
+                <tr class="table-active table-bordered">
+                    <th colspan="4" class="text-center"><h5><b style="font-size:18px;">Actual Repair Costs</b></h5></th>
+                </tr>
+                <tr class="table">
+                    <th>Item Code</th>
+                    <th>Repairability</th>
+                    <th>Cost Estimate</th>
+                    <th class="text-center">Actual Costs</th>
+                </tr>
+                @for (int i = 0; i < ViewBag.Count; i++)
+                {
+                    @Html.HiddenFor(model => model[i].ItemID)
+                    @Html.HiddenFor(model => model[i].QuoteID)
+                    @Html.HiddenFor(model => model[i].ItemCode)
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model[i].ItemCode, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model[i].Repairability)
+                            @Html.ValidationMessageFor(model => model[i].Repairability, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model[i].ECost, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model[i].ECost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model[i].ACost, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model[i].ACost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                }
+            </table>
+
+            
+            <div class="form-group">
+                <div class="text-center" style="margin-top:4vh;">
+                    <input type="submit" value="Generate Invoice" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/appjs/phones.js")
+}
+

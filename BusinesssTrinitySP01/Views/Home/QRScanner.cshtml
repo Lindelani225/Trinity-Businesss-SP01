@@ -1,0 +1,43 @@
+﻿@using Bytescout.BarCodeReader
+@{
+    string scr = ViewBag.Img;
+    FoundBarcode[] barcodes = ViewBag.Barcodes;
+}
+
+@using (Html.BeginForm("QRScanner", "Home", FormMethod.Post))
+{
+
+    <div class="jumbotron">
+        <div class="media">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content text-center">
+                    <div class="modal-header">
+                        <h4 class="modal-title">QRCode Reader - Use Your Camera To Scan</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="userMedia" style="height: auto; width: auto">
+                            <div class="text-center">
+                                <video id="video" width="450" height="225" autoplay playsinline muted></video>
+                                <canvas id="canvasU" width="640" height="480" style="display:none"></canvas>
+                                <br />
+                                <br />
+                                <textarea hidden="hidden" style="width:250PX; height:70PX;" size="8" id="OutListBoxHTML5"></textarea>
+                                <br />
+                                <input id="snap" style="color:black; font-weight:bold; margin-top:2vh;" type="button" onclick="UploadToCloud();" value="START SCAN" />
+                                <input id="pause" style="color:black; font-weight:bold; margin-left:3.8vw; margin-top:2vh;" type="button" onclick="stopCall();" value="STOP SCAN" />
+                                <p id="report"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" href="@Url.Action("TrackOrder","Home")">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="~/Scripts/webcam.js"></script>
+<script type="text/javascript" src="~/Scripts/index.js"></script>
+}

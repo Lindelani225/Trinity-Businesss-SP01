@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "AddPackage";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:8vh;">
+        <h4 class="text-success"><b>Would you like to add a custom decoration design?</b></h4>
+        <br />
+
+        <table>
+            <tr>
+                <td>
+                    <a class="btn btn-primary" data-modal="" href="@Url.Action("Create", "Packages", new { id = ViewBag.oID })" id="btnCreate">YES</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="btn btn-secondary" href="@Url.Action("PaymentOption", "Home", new { id = ViewBag.oID })">NO</a>
+                </td>
+            </tr>
+        </table>
+      
+
+     
+        <!-- modal placeholder-->
+        <div id='myModal' class='modal fade in'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+        @section scripts{
+            @Scripts.Render("~/Scripts/appjs/phones.js")
+        }
+
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BusinesssTrinitySP01.Models.ClientAddress>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientProfile.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Streetno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suburb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Province)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientProfile.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Streetno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suburb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostalCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AdID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AdID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AdID })
+        </td>
+    </tr>
+}
+
+</table>

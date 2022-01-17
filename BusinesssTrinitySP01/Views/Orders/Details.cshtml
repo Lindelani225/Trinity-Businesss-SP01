@@ -1,0 +1,326 @@
+﻿@model BusinesssTrinitySP01.Models.OrderView
+
+@{
+    ViewBag.Title = "Order Details";
+}
+@if (User.IsInRole("Super Admin"))
+{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@if (User.IsInRole("Driver"))
+{
+    Layout = "~/Views/Shared/DriverLayout.cshtml";
+}
+
+<style>
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05)
+    }
+
+        .well blockquote {
+            border-color: #ddd;
+            border-color: rgba(0,0,0,.15)
+        }
+
+    .dl-horizontal {
+        min-width: 73.8vw;
+        /*margin-right:50vw;*/
+    }
+
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 7px;
+    }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+    #chk {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <div class="container" style="margin-top:8vh;">
+        <div class="jumbotron">
+            <h2 class="text-center"><b>Client's Order Details</b></h2>
+            <br />
+            <p class="text-center"><b>Trinity Rental Service<br /> Administrator</b></p><br />
+            <div>
+                <br />
+                @Html.HiddenFor(x => x.order.OrderID)
+
+                <table style="width:100%">
+                    <tr class="table-active">
+                        <td colspan="4" align="center">
+                            <b>Personal Details</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><b>First Name:</b></label>
+                            @Html.DisplayFor(model => model.client.FirstName)
+                        </td>
+
+                        <td>
+                            <label><b>Last Name:</b></label>
+                            @Html.DisplayFor(model => model.client.LastName)
+                        </td>
+                        <td>
+                            <label><b>Gender:</b></label>
+                            @Html.DisplayFor(model => model.client.Cl_Gender)
+                        </td>
+
+                        <td>
+                            <label><b>Age:</b></label>
+                            @Html.DisplayFor(model => model.client.Cl_Age)
+                        </td>
+                    </tr>
+                    <tr class="table-active">
+                        <td colspan="2" align="center">
+                            <b>Contact Details</b>
+                        </td>
+                        <td colspan="2" align="center">
+                            <b>Order Details</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table style="width:100%">
+                                <tr>
+                                    <td colspan="2">
+                                        <label><b>Email:</b></label>
+                                        @Html.DisplayFor(model => model.client.Email)
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Phone:</b></label>
+                                        @Html.DisplayFor(model => model.client.Phone)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Street:</b></label>
+                                        @Html.DisplayFor(model => model.shipment.ClientAddress.Streetno)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Surbub:</b></label>
+                                        @Html.DisplayFor(model => model.shipment.ClientAddress.Suburb)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>City:</b></label>
+                                        @Html.DisplayFor(model => model.shipment.ClientAddress.City)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Province:</b></label>
+                                        @Html.DisplayFor(model => model.shipment.ClientAddress.Province)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Postal Code:</b></label>
+                                        @Html.DisplayFor(model => model.shipment.ClientAddress.PostalCode)
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td colspan="2">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <label><b>Event:</b></label>
+                                        @Html.DisplayFor(x => x.shipment.NameofEvent)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label><b>Event Date:</b></label>
+                                        @Html.DisplayFor(x => x.shipment.EventDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>End Date:</b></label>
+                                        @Html.DisplayFor(x => x.shipment.EndDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @if (Model.shipment.DeliveryType == "Self-Pickup")
+                                        {
+                                            <label><b>Pickup Date:</b></label>
+                                        }
+                                        else
+                                        {
+                                            <label><b>Delivery Date:</b></label>
+                                        }
+
+                                        @Html.DisplayFor(x => x.shipment.DeliveryDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Delivery Type:</b></label>
+                                        @Html.DisplayFor(x => x.shipment.DeliveryType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Payment Method:</b></label>
+                                        @Html.DisplayFor(x => x.order.PaymentMethod)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label><b>Date Created:</b></label>
+                                        @Html.DisplayFor(x => x.order.DateCreated)
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-hover">
+                    <tr class="table-active">
+                        <td colspan="4" align="center">
+                            <b>Order Items</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Name:</label>
+                        </th>
+
+                        <th>
+                            <label>Quantity:</label>
+                        </th>
+
+                        <th>
+                            <label>Price:</label>
+                        </th>
+                        @if (User.IsInRole("Driver"))
+                        {
+                            <th>
+                                <label>Check:</label>
+                            </th>
+                        }
+                    </tr>
+
+                    @foreach (var item in Model.orderItems)
+                    {
+                        <tr></tr>
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.Equipment.Name)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(model => item.quantity)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(model => item.price)
+                            </td>
+                            @if (User.IsInRole("Driver"))
+                            {
+                                <td>
+                                    <input id="chk" type="checkbox" />
+                                </td>
+                            }
+                        </tr>
+
+                    }
+                
+                </table>
+
+                @if (User.IsInRole("Super Admin"))
+                {
+                    if (Model.order.ProcessStatus == "Pending") 
+                    {
+                    <div class="form-group">
+                        <div class="text-center">
+                            <a href="@Url.Action(actionName: "PrepareOrder", controllerName: "Admin", routeValues: new { id = Model.order.OrderID })" class="btn btn-success">Process Order</a>
+                        </div>
+                    </div>
+                     }
+                    else
+                    {
+                          if (Model.order.ProcessStatus == "Processed") 
+                        {
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <a href="@Url.Action(actionName: "PrepareOrder", controllerName: "Admin", routeValues: new { id = Model.order.OrderID })" class="btn btn-success">Re-Assign</a>
+                                </div>
+                            </div>
+                        }
+
+                        if(Model.order.ProcessStatus =="On Delivery")
+                        {
+                            <div class="form-group">
+                                <div class="text-center">
+                                <a href="@Url.Action(actionName: "PrepareOrder", controllerName: "Admin", routeValues: new { id = Model.order.OrderID })" class="btn btn-success disabled">Currently Being Delivered</a>
+                                </div>
+                            </div>
+                        }
+                     
+                         if (Model.order.ProcessStatus == "Delivered") 
+                        {
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <a href="@Url.Action(actionName: "ScheduleReturn", controllerName: "Admin", routeValues: new { id = Model.order.OrderID })" class="btn btn-success">Schedule Return</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                 }
+
+                @if (User.IsInRole("Driver"))
+                {
+                    if (Model.order.ProcessStatus == "Processed")
+                    {
+                    <div class="form-group">
+                        <div class="text-center">
+                            <a href="@Url.Action(actionName: "StartDelivery", controllerName: "Drivers", routeValues: new { id = Model.order.OrderID })" class="btn btn-success">Start Delivery</a>
+                        </div>
+                    </div>
+                        }
+
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="text-center">
+                                <a href="@Url.Action(actionName: "StartDelivery", controllerName: "Drivers", routeValues: new { id = Model.order.OrderID })" class="btn btn-success">Drive to Location</a>
+                            </div>
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}

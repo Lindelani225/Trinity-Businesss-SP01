@@ -1,0 +1,74 @@
+﻿@model BusinesssTrinitySP01.Models.Shipment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Shipment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientAddress.Streetno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientAddress.Streetno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameofEvent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameofEvent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rentalperiod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rentalperiod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

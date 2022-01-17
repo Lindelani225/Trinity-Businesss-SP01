@@ -1,0 +1,56 @@
+﻿@model BusinesssTrinitySP01.Models.RepairItem
+
+<div class="modal-header">
+    <h4 class="modal-title fa fa-eye"> Item Details</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+</div>
+
+
+<div class="modal-body">
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                <label class="col-form-label">Damage&nbsp;Description</label>
+            </th>
+            <td>
+                <input type="text" class="form-control" value="@Model.Description" readonly="readonly" />
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <label class="col-form-label">Image&nbsp;1</label>
+            </th>
+            <td>
+                @if (Model.img != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.img);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' alt="" height=200 width=200 />
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label class="col-form-label">Image&nbsp;2</label>
+            </th>
+            <td>
+                @if (Model.img2 != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.img2);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' alt="" height=200 width=200  />
+                }
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+</div>
+
+@Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval", "~/Scripts/js/bootstrap.js")

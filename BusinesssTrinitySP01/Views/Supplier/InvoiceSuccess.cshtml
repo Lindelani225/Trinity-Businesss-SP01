@@ -1,0 +1,20 @@
+﻿@model BusinesssTrinitySP01.Models.Request
+@{
+    ViewBag.Title = "Invoice Success";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:2vh;">
+        <h2>Invoice Generated</h2>
+
+        <p class="text-success text-center">The repair invoice of @Html.DisplayFor(x => x.Type) has been generated.<br /> Thank you for your service.</p>
+        <br />
+        <div class="text-center">
+            <a class="btn btn-primary" href="@Url.Action("Index", "Supplier")">Go to Dashboard</a>
+        </div>
+
+    </div>
+</div>
+
+

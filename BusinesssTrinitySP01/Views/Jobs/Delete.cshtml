@@ -1,0 +1,84 @@
+﻿@model BusinesssTrinitySP01.Models.Job
+
+@{
+    ViewBag.Title = "Remove Post";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container" style="margin-top:4vh;">
+        <h3 class="text-center"><b>Remove Job Post</b></h3>
+        <br />
+
+      
+
+        <h3>Are you sure you want to remove this post?</h3>
+        <div>
+            <h4>Job</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobDescription)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobRequirments)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobRequirments)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClosingDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClosingDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-primary" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+ 

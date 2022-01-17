@@ -1,0 +1,102 @@
+﻿@model BusinesssTrinitySP01.Models.Order
+
+@{
+    ViewBag.Title = "Delete Order";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<style>
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05)
+    }
+
+        .well blockquote {
+            border-color: #ddd;
+            border-color: rgba(0,0,0,.15)
+        }
+</style>
+<div class="container" style="margin-top:8vh;">
+    <div class="well">
+
+        <h3>Are you sure you want to delete this order?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClientProfile.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClientProfile.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ShippimgDetails.NameofEvent)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ShippimgDetails.NameofEvent)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PaymentMethod)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PaymentMethod)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PaymentStatus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PaymentStatus)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProcessStatus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProcessStatus)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ConfirmationStatus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ConfirmationStatus)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-primary" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+    </div>
+</div>
