@@ -190,8 +190,8 @@ namespace BusinesssTrinitySP01.Controllers
             db.SaveChanges();
 
             var driver = db.employees.Find(prep_Order.AssignedDriver);
-            var client = new SendGridClient("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");
-            var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+            var client = new SendGridClient("");
+            var from = new EmailAddress("", "Trinity Pty(Ltd)");
             var subject = "New Delivery";
             var to = new EmailAddress(driver.EmpEmail, driver.EmpName);
             var htmlContent = "A new order has been assigned to you for delivery";
@@ -319,8 +319,8 @@ namespace BusinesssTrinitySP01.Controllers
 
             foreach(var supplier in suppliers)
             {
-                var client = new SendGridClient("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");
-                var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+                var client = new SendGridClient("");
+                var from = new EmailAddress("", "Trinity Pty(Ltd)");
                 var subject = "New Repair Request";
                 var to = new EmailAddress(supplier.SuppEmail, supplier.SuppName);
                 var htmlContent = "A new repair request of " + request.Type + " has been recieved ";
@@ -379,8 +379,8 @@ namespace BusinesssTrinitySP01.Controllers
             db.SaveChanges();
 
 
-            var client = new SendGridClient("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");
-            var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+            var client = new SendGridClient("");
+            var from = new EmailAddress("", "Trinity Pty(Ltd)");
             var subject = "Quote Feedback";
             var to = new EmailAddress(supplier.SuppEmail, supplier.SuppName);
             var htmlContent = "Thank you for the quotation of " + request.Type +". "+ "The items will be shipped on " + request.ShipmentDate.ToShortDateString() + ".";
@@ -394,8 +394,8 @@ namespace BusinesssTrinitySP01.Controllers
                 Supplier dcsupplier = db.suppliers.Where(x => x.SuppID == quoted.SuppID).FirstOrDefault();
                 quoted.Acceptance = "Declined";
                 db.SaveChanges();
-                var sclient = new SendGridClient("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");
-                var sfrom = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+                var sclient = new SendGridClient("");
+                var sfrom = new EmailAddress("", "Trinity Pty(Ltd)");
                 var ssubject = "Quote Feedback";
                 var sto = new EmailAddress(dcsupplier.SuppEmail, dcsupplier.SuppName);
                 var shtmlContent = "Hi " + dcsupplier.SuppName + "<br/><br/>" + "Thank you for taking your time to prepare a repair quote for Trinity Rentals Enterprise." + "<br/>" + "We really appriciate the effort you put in. Unfortunately your quotation was not selected." + "<br/><br/>" + "Regards," + "<br/><br/>" + "Trinity Rentals Enterprise."; 
