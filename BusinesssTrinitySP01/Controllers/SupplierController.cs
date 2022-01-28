@@ -211,10 +211,10 @@ namespace BusinesssTrinitySP01.Controllers
                     ViewBag.QuoteMnth = quote.DateCreated.ToString("MMM");
                     ViewBag.TotalCost = getTot.GetCost(quote.QuoteID).ToString("C");
 
-                    var client = new SendGridClient("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");
-                    var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+                    var client = new SendGridClient("");
+                    var from = new EmailAddress("", "Trinity Pty(Ltd)");
                     var subject = "Quote " + id + " | New Quote";
-                    var to = new EmailAddress("stevensntokozo@gmail.com", supplier.SuppName );
+                    var to = new EmailAddress("", supplier.SuppName );
                     var htmlContent = "A new quotation of " + request.Type +  " has been recieved from " + supplier.SuppName + ".";
                     var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
                     var response = client.SendEmailAsync(msg);
