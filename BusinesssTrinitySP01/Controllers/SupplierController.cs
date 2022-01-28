@@ -480,10 +480,10 @@ namespace BusinesssTrinitySP01.Controllers
             
 
             string url = "https://2021grp24.azurewebsites.net/Home/ViewInvoice" + quote.RequestID;
-            var client = new SendGridClient("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");
-            var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+            var client = new SendGridClient("");
+            var from = new EmailAddress("", "Trinity Pty(Ltd)");
             var subject = "Repair Invoice" + request.RequestID;
-            var to = new EmailAddress("stevensntokozo@gmail.com", "Admin");
+            var to = new EmailAddress("", "Admin");
             var htmlContent = "The supplier has repaired the items. Please view the generated invoice using this link." + url;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
             var response = client.SendEmailAsync(msg);
