@@ -310,8 +310,8 @@ namespace BusinesssTrinitySP01.Controllers
                          "</tr>";
                 table += "</table>";
 
-                var client = new SendGridClient("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");
-                var from = new EmailAddress("nkonzo144@gmail.com", "Trinity Pty(Ltd)");
+                var client = new SendGridClient("");
+                var from = new EmailAddress("", "Trinity Pty(Ltd)");
                 var subject = "Order " + id + " | Payment Recieved";
                 var to = new EmailAddress(order.ClientProfile.Email, order.ClientProfile.FirstName + " " + order.ClientProfile.LastName);
                 var htmlContent = "Hi " + order.ClientProfile.FirstName + "<br/><br/>" + "We recieved your payment, your order will be processed shortly."+"<br/>"+"Thank you for choosing us." + table;
